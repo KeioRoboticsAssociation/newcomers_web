@@ -1,0 +1,347 @@
+@charset "UTF-8";
+
+/*ページ全体の設定*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: #fff;
+}
+
+body {
+    margin: 0;
+    /* background: #333333; */
+    /* background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("img/NHK2024_R2.JPG"); */
+    background: #333333;
+    /*background-color: #99ccff*/
+}
+
+
+/*------------------------------
+
+  ここから下がハンバーガーメニュー
+  に関するCSS
+
+------------------------------*/
+
+
+/* チェックボックスは非表示に */
+
+.drawer-hidden {
+    display: none;
+}
+
+
+/* ハンバーガーアイコンの設置スペース */
+
+.drawer-open {
+    display: flex;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+    /* 重なり順を一番上に */
+    cursor: pointer;
+}
+
+
+/* ハンバーガーメニューのアイコン */
+
+.drawer-open span,
+.drawer-open span:before,
+.drawer-open span:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 5px;
+    background: #fff;
+    transition: 0.5s;
+    position: absolute;
+}
+
+
+/* 三本線のうち一番上の棒の位置調整 */
+
+.drawer-open span:before {
+    bottom: 8px;
+}
+
+
+/* 三本線のうち一番下の棒の位置調整 */
+
+.drawer-open span:after {
+    top: 8px;
+}
+
+
+/* アイコンがクリックされたら真ん中の線を透明にする */
+
+#drawer-check:checked~.drawer-open span {
+    background: rgba(255, 255, 255, 0);
+}
+
+
+/* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+
+#drawer-check:checked~.drawer-open span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+
+#drawer-check:checked~.drawer-open span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+
+/* メニューのデザイン*/
+
+.drawer-content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    /* メニューを画面の外に飛ばす */
+    z-index: 99;
+    background: #333333;
+    transition: .5s;
+}
+
+
+/* アイコンがクリックされたらメニューを表示 */
+
+@media screen and (max-width:700px) {
+    header {
+        width: auto;
+        padding: 5px 5px;
+        color: #ffffff;
+        font-size: 30px;
+        top: 0;
+        display: flex;
+        align-items: center;
+        background: #333333;
+        position: sticky;
+        z-index: 80;
+        height: 60px;
+    }
+
+    .join-button {
+        display: none;
+    }
+
+    .article {
+        width: auto;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: top;
+        background-image: url("img/NHK2024_R2.JPG");
+        padding: 20px 20px;
+    }
+
+    #drawer-check:checked~.drawer-content {
+        left: 0;
+        /* メニューを画面に入れる */
+    }
+
+    .image1 {
+        width: 80vw;
+        padding: 0;
+    }
+
+    .image2 {
+        width: 30vw;
+        padding: 0;
+    }
+
+    .item_container {
+        text-align: left;
+    }
+}
+
+@media screen and (min-width:700px) {
+    header {
+        width: auto;
+        padding: 5px 5px;
+        color: #ffffff;
+        font-size: 30px;
+        position: fixed;
+        top: 0;
+        display: flex;
+        align-items: center;
+        background: #333333;
+        position: sticky;
+        z-index: 80;
+        height: 60px;
+    }
+
+    .join-button {
+        display: flex;
+    }
+
+    .article {
+        width: auto;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: top;
+        background-size: cover;
+        background-image: url("img/NHK2024_R2.JPG");
+        padding: 20px 20px;
+    }
+
+    #drawer-check:checked~.drawer-content {
+        left: 60%;
+        /* メニューを画面に入れる */
+    }
+
+    .image1 {
+        width: 560px;
+    }
+
+    .image2 {
+        width: 210px;
+    }
+
+    ul.ul_item {
+        /* list-style: none; */
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        /* 左寄せ */
+        align-items: center;
+        /* 中央揃え */
+    }
+
+    .item_container {
+        text-align: center;
+    }
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    padding: 30px 0px 30px 30px;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+a.inline_link {
+    padding: 0;
+}
+
+.solid_link {
+    display: block;
+}
+
+.solid_link:hover {
+    background-color: #161718;
+}
+
+.normal-list {
+    margin: 0 20px 0 auto;
+}
+
+.join-button {
+    font-size: 12px;
+}
+
+.block1 {
+    text-align: center;
+    background: rgba(51, 51, 51, 0.7);
+    padding: 20px;
+    color: #ffffff;
+}
+
+.main_img {
+    width: 100%;
+    height: auto;
+}
+
+.round {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button1 {
+    padding: 15px 15px 15px 15px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #161718;
+    border-style: none;
+    opacity: 0.9;
+}
+
+.button1:hover {
+    color: #ffffff;
+    background-color: #333333;
+}
+
+.head1 {
+    font-size: 24px;
+    /*text-align: center;
+    color: #*/
+}
+
+.head2 {
+    font-size: 20px;
+}
+
+.content1 {
+    font-size: 16px;
+    text-align: center;
+}
+
+.srt {
+    opacity: 0;
+}
+
+.blank {
+    opacity: 0;
+}
+
+.item_container ul {
+    list-style-type: disc;
+}
+
+ul.style-none {
+    list-style-type: none;
+}
+
+footer {
+    width: auto;
+    text-align: right;
+    background-color: #333333;
+    padding: 5px 5px;
+    color: #ffffff;
+}
+
+/*新歓教室地図ページ*/
+
+a.map_image {
+    padding: 0;
+}
+
+a.map_image:hover {
+    opacity: 1;
+}
+
+/* 入部式ページ */
+
+
+/* .left_align {
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+} */
+
+/*770以上で分ける*/
