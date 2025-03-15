@@ -18,6 +18,7 @@ body {
     background-position: top;
     background-image: url("img/NHK2024_R2.JPG"); */
     background: #333333;
+    font-family: "sans-serif";
     /*background-color: #99ccff*/
 }
 
@@ -162,6 +163,15 @@ body {
         padding: 0;
     }
 
+    .image3 {
+        width: max(50vw, 180px);
+        /* padding: 0 5px 0 5px; */
+    }
+
+    .QR_code {
+        /* display: grid; */
+    }
+
     .item_container {
         text-align: left;
     }
@@ -208,6 +218,17 @@ body {
 
     .image2 {
         width: 210px;
+    }
+
+    .image3 {
+        width: min(40vw, 190px);
+        padding: 0 10px 0 10px;
+    }
+
+    .QR_code {
+        display: flex;
+        justify-content: center;
+        /* text-align: center; */
     }
 
     ul.ul_item {
