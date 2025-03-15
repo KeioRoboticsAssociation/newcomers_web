@@ -332,6 +332,7 @@ a.inline_link {
 
 ul.style-none {
     list-style-type: none;
+    padding-left: 0;
 }
 
 footer {
