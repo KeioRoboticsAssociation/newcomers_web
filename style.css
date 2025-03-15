@@ -167,11 +167,7 @@ body {
         width: max(50vw, 180px);
         /* padding: 0 5px 0 5px; */
     }
-
-    .QR_code {
-        /* display: grid; */
-    }
-
+    
     .item_container {
         text-align: left;
     }
