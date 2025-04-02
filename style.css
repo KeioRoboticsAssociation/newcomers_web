@@ -279,6 +279,13 @@ a.inline_link {
     color: #ffffff;
 }
 
+.block2 {
+    text-align: center;
+    background: rgba(115, 252, 3, 0.7);
+    padding: 20px;
+    color: #ffffff;
+}
+
 .main_img {
     width: 100%;
     height: auto;
