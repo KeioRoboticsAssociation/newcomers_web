@@ -1,44 +1,85 @@
 @charset "UTF-8";
 
-/*ページ全体の設定*/
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;600;700&display=swap');
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background: #fff;
+/* ===== CSS Variables ===== */
+:root {
+    --color-bg: #0f0f1a;
+    --color-surface: rgba(255, 255, 255, 0.06);
+    --color-surface-hover: rgba(255, 255, 255, 0.1);
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-text: #e8e8f0;
+    --color-text-muted: #a0a0b8;
+    --color-accent: #5aba0b;
+    --color-accent-glow: rgba(90, 186, 11, 0.3);
+    --color-header-bg: rgba(15, 15, 26, 0.85);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-main: 'Noto Sans JP', 'Inter', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, sans-serif;
+}
+
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    /* background: #333333; */
-    /* background-attachment: fixed;
-    background-size: cover;
-    background-position: top;
-    background-image: url("img/NHK2024_R2.JPG"); */
-    background: #333333;
-    font-family: YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
-    /*background-color: #99ccff*/
+    overflow-x: hidden;
+    background: var(--color-bg);
+    font-family: var(--font-main);
+    color: var(--color-text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
 
-/*------------------------------
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
 
-  ここから下がハンバーガーメニュー
-  に関するCSS
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
 
-------------------------------*/
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
 
+/* ===== Header ===== */
+header {
+    width: 100%;
+    padding: 0 24px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    background: var(--color-header-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 80;
+    height: 64px;
+    transition: background var(--transition);
+}
 
-/* チェックボックスは非表示に */
-
+/* ===== Hamburger Menu ===== */
 .drawer-hidden {
     display: none;
 }
-
-
-/* ハンバーガーアイコンの設置スペース */
 
 .drawer-open {
     display: flex;
@@ -48,49 +89,39 @@ body {
     align-items: center;
     position: relative;
     z-index: 100;
-    /* 重なり順を一番上に */
     cursor: pointer;
 }
-
-
-/* ハンバーガーメニューのアイコン */
 
 .drawer-open span,
 .drawer-open span:before,
 .drawer-open span:after {
     content: '';
     display: block;
-    height: 3px;
-    width: 25px;
-    border-radius: 5px;
+    height: 2px;
+    width: 22px;
+    border-radius: 2px;
     background: #fff;
-    transition: 0.5s;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
 }
 
-
-/* 三本線のうち一番上の棒の位置調整 */
+.drawer-open span {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .drawer-open span:before {
-    bottom: 8px;
+    bottom: 7px;
 }
-
-
-/* 三本線のうち一番下の棒の位置調整 */
 
 .drawer-open span:after {
-    top: 8px;
+    top: 7px;
 }
-
-
-/* アイコンがクリックされたら真ん中の線を透明にする */
 
 #drawer-check:checked~.drawer-open span {
     background: rgba(255, 255, 255, 0);
 }
-
-
-/* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
 
 #drawer-check:checked~.drawer-open span::before {
     bottom: 0;
@@ -102,166 +133,64 @@ body {
     transform: rotate(-45deg);
 }
 
-
-/* メニューのデザイン*/
-
+/* Drawer Menu */
 .drawer-content {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 100%;
-    /* メニューを画面の外に飛ばす */
     z-index: 99;
-    background: #333333;
-    transition: .5s;
+    background: rgba(15, 15, 26, 0.97);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-/* アイコンがクリックされたらメニューを表示 */
-
-@media screen and (max-width:700px) {
-    header {
-        width: auto;
-        padding: 5px 5px;
-        color: #ffffff;
-        font-size: 30px;
-        top: 0;
-        display: flex;
-        align-items: center;
-        background: #333333;
-        position: sticky;
-        z-index: 80;
-        height: 60px;
-    }
-
-    .join-button {
-        display: none;
-    }
-
-    .article {
-        width: auto;
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: top;
-        background-image: url("img/NHK2024_R2.JPG");
-        padding: 20px 20px;
-    }
-
-    #drawer-check:checked~.drawer-content {
-        left: 0;
-        /* メニューを画面に入れる */
-    }
-
-    .image1 {
-        width: 80vw;
-        padding: 0;
-    }
-
-    .image2 {
-        width: 30vw;
-        padding: 0;
-    }
-
-    .image3 {
-        width: max(50vw, 180px);
-        /* padding: 0 5px 0 5px; */
-    }
-    
-    .item_container {
-        text-align: left;
-    }
-}
-
-@media screen and (min-width:700px) {
-    header {
-        width: auto;
-        padding: 5px 5px;
-        color: #ffffff;
-        font-size: 30px;
-        position: fixed;
-        top: 0;
-        display: flex;
-        align-items: center;
-        background: #333333;
-        position: sticky;
-        z-index: 80;
-        height: 60px;
-    }
-
-    .join-button {
-        display: flex;
-    }
-
-    .article {
-        width: auto;
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: top;
-        background-size: cover;
-        background-image: url("img/NHK2024_R2.JPG");
-        padding: 20px 20px;
-    }
-
-    #drawer-check:checked~.drawer-content {
-        left: 60%;
-        /* メニューを画面に入れる */
-    }
-
-    .image1 {
-        width: 560px;
-    }
-
-    .image2 {
-        width: 210px;
-    }
-
-    .image3 {
-        width: min(40vw, 190px);
-        padding: 0 10px 0 10px;
-    }
-
-    .QR_code {
-        display: flex;
-        justify-content: center;
-        /* text-align: center; */
-    }
-
-    ul.ul_item {
-        /* list-style: none; */
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        /* 左寄せ */
-        align-items: center;
-        /* 中央揃え */
-    }
-
-    .item_container {
-        text-align: center;
-    }
-}
-
+/* ===== Links ===== */
 a {
     color: inherit;
     text-decoration: none;
-    padding: 30px 0px 30px 30px;
+    padding: 24px 0 24px 30px;
+    transition: color var(--transition);
 }
 
 a:hover {
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 a.inline_link {
     padding: 0;
+    color: var(--color-accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition);
+}
+
+a.inline_link:hover {
+    border-bottom-color: var(--color-accent);
+    opacity: 1;
 }
 
 .solid_link {
     display: block;
+    margin: 8px 16px;
+    padding: 20px 0 !important;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.1em;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.solid_link:last-child {
+    border-bottom: none;
 }
 
 .solid_link:hover {
-    background-color: #161718;
+    color: var(--color-accent) !important;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .normal-list {
@@ -269,60 +198,164 @@ a.inline_link {
 }
 
 .join-button {
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 500;
 }
 
+.join-button a {
+    padding: 10px 20px;
+    border: 1px solid var(--color-accent);
+    border-radius: 100px;
+    color: var(--color-accent);
+    transition: all var(--transition);
+}
+
+.join-button a:hover {
+    background: var(--color-accent);
+    color: #fff;
+    opacity: 1;
+}
+
+/* ===== Article (Background) ===== */
+.article {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    padding: 32px 24px;
+    position: relative;
+    background-color: var(--color-bg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center top;
+    background-image: url("img/NHK2024_R2.JPG");
+}
+
+/* Dark overlay on background image for readability */
+.article::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,
+            rgba(15, 15, 26, 0.7) 0%,
+            rgba(15, 15, 26, 0.5) 30%,
+            rgba(15, 15, 26, 0.7) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.article>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Glassmorphism Card Blocks ===== */
 .block1 {
     text-align: center;
-    background: rgba(51, 51, 51, 0.7);
-    padding: 20px;
-    color: #ffffff;
+    background: rgba(20, 20, 35, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    color: var(--color-text);
+    margin-bottom: 20px;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+.block1:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Staggered animation for block1 elements */
+.block1:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.block1:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.block1:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.block1:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.block1:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.block1:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.block1:nth-child(8) {
+    animation-delay: 0.7s;
 }
 
 .block2 {
     text-align: center;
-    background: rgba(90, 186, 11, 0.85);
-    padding: 20px;
+    background: linear-gradient(135deg, rgba(90, 186, 11, 0.85), rgba(60, 140, 5, 0.85));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(90, 186, 11, 0.3);
+    border-radius: var(--radius);
+    padding: 28px 32px;
     color: #ffffff;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 30px var(--color-accent-glow);
+    animation: fadeInUp 0.6s ease-out both;
 }
 
-.main_img {
-    width: 100%;
-    height: auto;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.round {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.button1 {
-    padding: 15px 15px 15px 15px;
-    font-size: 20px;
-    color: #ffffff;
-    background-color: #161718;
-    border-style: none;
-    opacity: 0.9;
-}
-
-.button1:hover {
-    color: #ffffff;
-    background-color: #333333;
-}
-
+/* ===== Typography ===== */
 .head1 {
-    font-size: 24px;
-    /*text-align: center;
-    color: #*/
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: #ffffff;
 }
 
 .head2 {
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 0 0 16px 0;
+    background: linear-gradient(135deg, #fff 0%, var(--color-text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .content1 {
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
+    color: var(--color-text-muted);
+    line-height: 1.8;
 }
 
 .srt {
@@ -333,6 +366,44 @@ a.inline_link {
     opacity: 0;
 }
 
+/* ===== Images ===== */
+.main_img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+.round {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== Buttons ===== */
+.button1 {
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-main);
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(90, 186, 11, 0.9), rgba(60, 150, 5, 0.9));
+    border: 1px solid rgba(90, 186, 11, 0.4);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.03em;
+}
+
+.button1:hover {
+    background: linear-gradient(135deg, rgba(100, 200, 20, 1), rgba(70, 160, 10, 1));
+    box-shadow: 0 4px 24px var(--color-accent-glow);
+    transform: translateY(-1px);
+}
+
+.button1:active {
+    transform: translateY(0);
+}
+
+/* ===== Lists ===== */
 .item_container ul {
     list-style-type: disc;
 }
@@ -342,16 +413,19 @@ ul.style-none {
     padding-left: 0;
 }
 
-footer {
-    width: auto;
-    text-align: right;
-    background-color: #333333;
-    padding: 5px 5px;
-    color: #ffffff;
+/* ===== QR Code section ===== */
+.QR_code img {
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    transition: transform var(--transition), box-shadow var(--transition);
 }
 
-/*新歓教室地図ページ*/
+.QR_code img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
 
+/* ===== Map images ===== */
 a.map_image {
     padding: 0;
 }
@@ -360,13 +434,651 @@ a.map_image:hover {
     opacity: 1;
 }
 
-/* 入部式ページ */
+/* ===== FAQ Page ===== */
 
+/* Hero */
+.faq-hero {
+    text-align: center;
+    padding: 40px 24px 32px;
+    background: rgba(15, 15, 26, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.5s ease-out both;
+}
 
-/* .left_align {
+.faq-hero-title {
+    font-size: 40px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+}
+
+.faq-hero-subtitle {
+    color: #ffffff;
+    font-size: 15px;
+    margin: 8px 0 0;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Category Section */
+.faq-section {
+    background: rgba(20, 20, 35, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0;
+    margin-bottom: 20px;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out both;
+    transition: border-color var(--transition);
+}
+
+.faq-section:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Category Header */
+.faq-category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 28px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.faq-category-icon {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.faq-category-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.03em;
+}
+
+/* FAQ Item (Accordion) */
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+/* Question (Summary) */
+.faq-question {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 28px;
+    cursor: pointer;
+    transition: background var(--transition);
+    list-style: none;
+    user-select: none;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question::marker {
+    content: '';
+}
+
+.faq-question:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Q Badge */
+.faq-q-badge {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-} */
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 8px;
+    background: rgba(90, 186, 11, 0.15);
+    color: var(--color-accent);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
 
-/*770以上で分ける*/
+.faq-q-text {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+/* Chevron */
+.faq-chevron {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-chevron::before,
+.faq-chevron::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    background: var(--color-text-muted);
+    border-radius: 1px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-chevron::before {
+    right: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    transform-origin: right center;
+}
+
+.faq-chevron::after {
+    left: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    transform-origin: left center;
+}
+
+/* Open state chevron flip */
+details[open]>.faq-question .faq-chevron::before {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+details[open]>.faq-question .faq-chevron::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+/* Answer */
+.faq-answer {
+    display: flex;
+    gap: 14px;
+    padding: 0 28px 20px 28px;
+    animation: faqSlideDown 0.3s ease-out;
+}
+
+@keyframes faqSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* A Badge */
+.faq-a-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.faq-a-text {
+    flex: 1;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+.faq-a-text p {
+    margin: 0 0 4px;
+}
+
+.faq-a-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Software List */
+.faq-software-list {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    list-style: disc;
+}
+
+.faq-software-list li {
+    margin-bottom: 4px;
+    padding: 0;
+}
+
+/* External Link */
+.faq-ext-link {
+    display: inline-block;
+    padding: 10px 16px !important;
+    margin-top: 8px;
+    background: rgba(90, 186, 11, 0.1);
+    border: 1px solid rgba(90, 186, 11, 0.25);
+    border-radius: var(--radius-sm);
+    color: var(--color-accent) !important;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all var(--transition);
+    text-decoration: none;
+}
+
+.faq-ext-link:hover {
+    background: rgba(90, 186, 11, 0.2);
+    border-color: rgba(90, 186, 11, 0.4);
+    opacity: 1 !important;
+}
+
+/* ===== Footer ===== */
+footer {
+    width: 100%;
+    text-align: right;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    padding: 20px 24px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+/* ===== Mobile (max-width: 700px) ===== */
+@media screen and (max-width: 700px) {
+    header {
+        padding: 0 12px;
+        font-size: 18px;
+    }
+
+    .join-button {
+        display: none;
+    }
+
+    .article {
+        padding: 20px 16px;
+    }
+
+    #drawer-check:checked~.drawer-content {
+        left: 0;
+    }
+
+    .image1 {
+        width: 80vw;
+        padding: 0;
+        border-radius: var(--radius-sm);
+    }
+
+    .image2 {
+        width: 30vw;
+        padding: 0;
+    }
+
+    .image3 {
+        width: max(50vw, 160px);
+    }
+
+    .item_container {
+        text-align: left;
+    }
+
+    .block1,
+    .block2 {
+        padding: 28px 20px;
+    }
+
+    /* FAQ mobile */
+    .faq-hero {
+        padding: 32px 0 16px;
+    }
+
+    .faq-hero-title {
+        font-size: 30px;
+    }
+
+    .faq-category-header {
+        padding: 16px 18px;
+    }
+
+    .faq-question {
+        padding: 14px 18px;
+        gap: 10px;
+    }
+
+    .faq-answer {
+        padding: 0 18px 16px 18px;
+        gap: 10px;
+    }
+
+    .faq-q-badge,
+    .faq-a-badge {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    .faq-q-text {
+        font-size: 14px;
+    }
+}
+
+/* ===== Desktop (min-width: 700px) ===== */
+@media screen and (min-width: 700px) {
+    .join-button {
+        display: flex;
+    }
+
+    .article {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 48px;
+    }
+
+    #drawer-check:checked~.drawer-content {
+        left: 0%;
+    }
+
+    .image1 {
+        width: 560px;
+        border-radius: var(--radius);
+    }
+
+    .image2 {
+        width: 210px;
+    }
+
+    .image3 {
+        width: min(40vw, 170px);
+        padding: 0 10px;
+    }
+
+    .QR_code {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    ul.ul_item {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        align-items: center;
+    }
+
+    .item_container {
+        text-align: center;
+    }
+
+    /* FAQ desktop */
+    .faq-section {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 24px;
+    }
+
+    .faq-hero {
+        padding: 56px 32px 40px;
+        margin-bottom: 32px;
+    }
+}
+
+/* ===== Nyubushiki Page ===== */
+.nyu-hero {
+    text-align: center;
+    padding: 40px 24px 32px;
+    background: rgba(15, 15, 26, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+.nyu-hero-icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.nyu-hero-title {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+}
+
+.nyu-hero-subtitle {
+    color: var(--color-text-muted);
+    font-size: 15px;
+    margin: 8px 0 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nyu-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.nyu-info-card {
+    background: rgba(20, 20, 35, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    transition: transform var(--transition), border-color var(--transition);
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+.nyu-info-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.nyu-info-card--accent {
+    background: linear-gradient(135deg, rgba(90, 186, 11, 0.15), rgba(60, 140, 5, 0.1));
+    border-color: rgba(90, 186, 11, 0.3);
+}
+
+.nyu-info-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.nyu-info-label {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.nyu-info-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.nyu-info-detail {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+}
+
+.nyu-form-link {
+    display: inline-block;
+    padding: 10px 24px !important;
+    background: linear-gradient(135deg, rgba(90, 186, 11, 0.9), rgba(60, 150, 5, 0.9));
+    color: #fff !important;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 4px;
+    box-shadow: 0 4px 15px rgba(90, 186, 11, 0.2);
+}
+
+.nyu-form-link:hover {
+    box-shadow: 0 6px 20px rgba(90, 186, 11, 0.4);
+    transform: translateY(-1px);
+}
+
+.nyu-section {
+    padding: 24px;
+    text-align: left;
+}
+
+.nyu-section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+}
+
+.nyu-section-icon {
+    font-size: 24px;
+}
+
+.nyu-section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.nyu-content-body {
+    width: 100%;
+}
+
+.nyu-program-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nyu-program-list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    transition: background var(--transition);
+}
+
+.nyu-program-list li:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.nyu-program-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: rgba(90, 186, 11, 0.2);
+    color: var(--color-accent);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.nyu-two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.nyu-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nyu-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.nyu-checklist li:last-child {
+    border-bottom: none;
+}
+
+.nyu-check {
+    color: var(--color-accent);
+    font-weight: 900;
+    font-size: 18px;
+    margin-top: -2px;
+}
+
+.nyu-note {
+    display: block;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+.nyu-inline-action {
+    display: inline-block;
+    color: var(--color-accent) !important;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 !important;
+    margin-top: 8px;
+    border-bottom: 1px solid var(--color-accent);
+}
+
+@media screen and (min-width: 700px) {
+    .nyu-hero {
+        padding: 48px 0 32px;
+    }
+
+    .nyu-hero-title {
+        font-size: 40px;
+    }
+
+    .nyu-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+
+    .nyu-two-col {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    .nyu-section {
+        padding: 32px;
+    }
+}
